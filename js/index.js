@@ -13,6 +13,15 @@ let previousNumber = '';
 let currentNumber = '';
 let operator = '';
 
+//Clear all elements.
+clear.addEventListener('click', () => {
+  previousNumber = '';
+  currentNumber = '';
+  operator = '';
+  topDisplay.textContent = '';
+  bottomDisplay.textContent = '';
+});
+
 //Handle numbers that are selected.
 numbers.forEach(numbers => numbers.addEventListener('click',(e) => {
   handleNumbers(e.target.textContent);
