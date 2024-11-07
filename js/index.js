@@ -1,20 +1,21 @@
-const mainDisplay = document.querySelector('.displayContainer');
-const topDisplay = document.querySelector('.topDisplay');
-const bottomDisplay = document.querySelector('.bottomDisplay');
-const buttonsContainer = document.querySelector('.buttonsContainer');
-const clear = document.querySelector('.clear');
-const backspace = document.querySelector('.backspace');
-let numbers = document.querySelectorAll('.numbers');
-let operators = document.querySelectorAll('.operators');
-const decimal = document.querySelector('.decimal');
-const equal = document.querySelector('.equal');
+const mainCalculator = document.querySelector('#js-calculator-container')
+const mainDisplay = document.querySelector('#js-display-container');
+const topDisplay = document.querySelector('#js-top-display');
+const bottomDisplay = document.querySelector('#js-bottom-display');
+const buttonsContainer = document.querySelector('#js-buttons-container');
+const clearButton = document.querySelector('.clear');
+const backspaceButton = document.querySelector('.backspace');
+let numberButtons = document.querySelectorAll('.numbers');
+let operatorButtons = document.querySelectorAll('.operators');
+const decimalButton = document.querySelector('.decimal');
+const equalButton = document.querySelector('.equal');
 
 let previousNumber = '';
 let currentNumber = '';
 let operator = '';
 
 //Clear all elements.
-clear.addEventListener('click', () => {
+clearButton.addEventListener('click', () => {
   previousNumber = '';
   currentNumber = '';
   operator = '';
@@ -23,46 +24,47 @@ clear.addEventListener('click', () => {
 });
 
 //Handle numbers that are selected.
-numbers.forEach(numbers => numbers.addEventListener('click',(e) => {
-  handleNumbers(e.target.textContent);
+numberButtons.forEach(numbers => numbers.addEventListener('click',(e) => {
+  handleNumberButtons(e.target.textContent);
   bottomDisplay.textContent = currentNumber;
 }));
 
-function handleNumbers(num) {
+function handleNumberButtons(num) {
   currentNumber += num;
 };
 
 //Handle operators that are selected.
-operators.forEach(op => op.addEventListener('click',(e) => {
-  handleOperators(e.target.textContent);
+operatorButtons.forEach(op => op.addEventListener('click',(e) => {
+  handleOperatorButtons(e.target.textContent);
   topDisplay.textContent = `${previousNumber} ${operator}`;
   bottomDisplay.textContent = '';
 }));
 
-function handleOperators(op) {
+function handleOperatorButtons(op) {
   operator = op
   previousNumber = currentNumber;
   currentNumber = '';
 };
 
 //Calculate.
-equal.addEventListener('click', () => {
+equalButton.addEventListener('click', () => {
   operate();
 });
 
 function operate() {
-  previousNumber = Number(previousNumber);
-  currentNumber = Number(currentNumber);
+  let num1 = Number(previousNumber);
+  let num2 = Number(currentNumber);
 
-  //Ternary style if else type statement.
-  previousNumber = operator === '+' ? previousNumber + currentNumber 
-                  : operator === '-' ? previousNumber - currentNumber 
-                  : operator === 'X' ? previousNumber * currentNumber 
-                  : currentNumber !== 0 ? previousNumber / currentNumber
-                  : 'ERROR: Division by Zero'
+  // Ternary style if else type statement.
+  sum = operator === '+' ? num1 + num2 
+      : operator === '-' ? num1 - num2 
+      : operator === 'X' ? num1 * num2 
+      : num2 !== 0 ? num1 / num2
+      : num1 === 0 && num2 === 0 ? 'ERROR: Indeterminate'
+      : 'ERROR: Division by Zero';
 
-  bottomDisplay.textContent = previousNumber;
-  currentNumber = previousNumber;
-  operator = '';
-  return previousNumber;
+  bottomDisplay.textContent = sum; // Show sum at bottom.
+  previousNumber = sum; // Make the sum become the first number.
+  currentNumber = ''; // Clear the second number so it is ready to be operated on with the first number.
+  operator = ''; // Clear the operator so a new one can be used with the next sum.
 };
