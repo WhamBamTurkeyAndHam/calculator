@@ -14,7 +14,7 @@ let previousNumber = '';
 let currentNumber = '';
 let operator = '';
 
-//Clear all elements.
+// Clear all elements.
 clearButton.addEventListener('click', () => {
   previousNumber = '';
   currentNumber = '';
@@ -23,28 +23,37 @@ clearButton.addEventListener('click', () => {
   bottomDisplay.textContent = '';
 });
 
-//Handle numbers that are selected.
+// Handle numbers that are selected.
 numberButtons.forEach(numbers => numbers.addEventListener('click',(e) => {
   handleNumberButtons(e.target.textContent);
-  bottomDisplay.textContent = currentNumber;
+  bottomDisplay.textContent = `${previousNumber} ${operator} ${currentNumber}`;
 }));
 
 function handleNumberButtons(num) {
   currentNumber += num;
 };
 
-//Handle operators that are selected.
+// Handle operators that are selected.
 operatorButtons.forEach(op => op.addEventListener('click',(e) => {
+  if (previousNumber !== '' && operator !== '' && currentNumber !== '') {
+    operate();
+  }
   handleOperatorButtons(e.target.textContent);
-  topDisplay.textContent = `${previousNumber} ${operator}`;
-  bottomDisplay.textContent = '';
+  bottomDisplay.textContent = `${previousNumber} ${operator} ${currentNumber}`;
 }));
 
 function handleOperatorButtons(op) {
-  operator = op
+  if (currentNumber === '' && previousNumber !== '') {
+    // Update operator if no new number was entered.
+    operator = op;
+    bottomDisplay.textContent = `${previousNumber} ${operator} ${currentNumber}`;
+    return;
+  }
+  operator = op;
   previousNumber = currentNumber;
   currentNumber = '';
 };
+
 
 // Calculate.
 equalButton.addEventListener('click', () => {
