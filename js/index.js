@@ -46,9 +46,19 @@ function handleOperatorButtons(op) {
   currentNumber = '';
 };
 
-//Calculate.
+// Calculate.
 equalButton.addEventListener('click', () => {
-  operate();
+  // Check if the first number is empty, or the first number exists but the operator is empty.
+  if (currentNumber === '' || currentNumber !== '' && operator === '') return bottomDisplay.textContent = 'ERROR: Invalid Input';
+  if (previousNumber !== '' && operator !== '' && currentNumber !== '') {
+    const originalPrevious = previousNumber; // Store for display.
+    const originalOperator = operator; // Store for display.
+    const originalCurrent = currentNumber;   // Store for display.
+
+    topDisplay.textContent = `${originalPrevious} ${originalOperator} ${originalCurrent} =`;
+
+    operate();
+  }
 });
 
 function operate() {
