@@ -20,68 +20,117 @@ clearButton.addEventListener('click', () => {
   currentNumber = '';
   operator = '';
   topDisplay.textContent = '';
-  bottomDisplay.textContent = '';
+  bottomDisplay.textContent = 0;
+  backspaceButton.disabled = false;
+});
+
+// Backspace element.
+backspaceButton.addEventListener('click', () => {
+  currentNumber = currentNumber.slice(0, -1);
+  bottomDisplay.textContent = `${previousNumber} ${operator} ${currentNumber}`;
 });
 
 // Handle numbers that are selected.
 numberButtons.forEach(numbers => numbers.addEventListener('click',(e) => {
-  handleNumberButtons(e.target.textContent);
+  if (currentNumber === '0') currentNumber = '';
+  if (bottomDisplay.textContent.includes('ERROR')) { // If there is an error message displayed, reset everything.
+    bottomDisplay.textContent = '';
+    currentNumber = '';
+    previousNumber = '';
+    operator = '';
+
+    // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
+    setTimeout(() => {
+      topDisplay.textContent = '';
+    }, 1500);
+  }
+  const num = e.target.textContent;
+  currentNumber += num;
   bottomDisplay.textContent = `${previousNumber} ${operator} ${currentNumber}`;
 }));
-
-function handleNumberButtons(num) {
-  currentNumber += num;
-};
 
 // Handle operators that are selected.
-operatorButtons.forEach(op => op.addEventListener('click',(e) => {
-  if (previousNumber !== '' && operator !== '' && currentNumber !== '') {
+operatorButtons.forEach(button => button.addEventListener('click', (e) => {
+  if (previousNumber !== '' && operator && currentNumber) {
     operate();
   }
-  handleOperatorButtons(e.target.textContent);
+  operator = e.target.textContent;
+  previousNumber = currentNumber || previousNumber;
+  currentNumber = '';
+  backspaceButton.disabled = false;
   bottomDisplay.textContent = `${previousNumber} ${operator} ${currentNumber}`;
 }));
 
-function handleOperatorButtons(op) {
-  if (currentNumber === '' && previousNumber !== '') {
-    // Update operator if no new number was entered.
-    operator = op;
-    bottomDisplay.textContent = `${previousNumber} ${operator} ${currentNumber}`;
-    return;
-  }
-  operator = op;
-  previousNumber = currentNumber;
-  currentNumber = '';
-};
-
-
-// Calculate.
 equalButton.addEventListener('click', () => {
-  // Check if the first number is empty, or the first number exists but the operator is empty.
-  if (currentNumber === '' || currentNumber !== '' && operator === '') return bottomDisplay.textContent = 'ERROR: Invalid Input';
-  if (previousNumber !== '' && operator !== '' && currentNumber !== '') {
-    const originalPrevious = previousNumber; // Store for display.
-    const originalOperator = operator; // Store for display.
-    const originalCurrent = currentNumber;   // Store for display.
+  // Handle invalid input scenario.
+  if (currentNumber === '' || operator === '') {
+    bottomDisplay.textContent = 'ERROR: Invalid Input';
+    
+    // Reset the calculator state after displaying the error.
+    currentNumber = '';
+    previousNumber = '';
+    operator = '';
 
-    topDisplay.textContent = `${originalPrevious} ${originalOperator} ${originalCurrent} =`;
-
-    operate();
+    // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS).
+    setTimeout(() => {
+      topDisplay.textContent = '';
+    }, 1500);
+  } else {
+    // Proceed with normal calculation if all values are valid.
+    if (previousNumber !== '' && operator !== '' && currentNumber !== '') {
+      topDisplay.textContent = `${previousNumber} ${operator} ${currentNumber} =`;
+      operate();
+    }
   }
 });
 
 function operate() {
   let num1 = Number(previousNumber);
   let num2 = Number(currentNumber);
+  sum = '';
 
-  // Ternary style if else type statement.
-  sum = operator === '+' ? num1 + num2 
-      : operator === '-' ? num1 - num2 
-      : operator === 'X' ? num1 * num2 
-      : num2 !== 0 ? num1 / num2
-      : num1 === 0 && num2 === 0 ? 'ERROR: Indeterminate'
-      : 'ERROR: Division by Zero';
+  // Switch/Case style with if else statement.
+  
+  switch (operator) {
+    case '+':
+      sum = num1 + num2;
+      break
+    case '-':
+      sum = num1 - num2;
+      break
+    case 'X':
+      sum = num1 * num2;
+      break
+    case '÷':
+      if (num1 === 0 && num2 === 0) {
+        sum = bottomDisplay.textContent = 'ERROR: Indeterminate'
+        
+        currentNumber = '';
+        previousNumber = '';
+        operator = '';
+    
+        // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
+        setTimeout(() => {
+          topDisplay.textContent = '';
+        }, 1500);
 
+      } else if (num2 === 0) {
+        sum = bottomDisplay.textContent = 'ERROR: Division by Zero';
+                
+        currentNumber = '';
+        previousNumber = '';
+        operator = '';
+    
+      } else {
+        sum = num1 / num2;
+      }
+      break
+    default:
+      sum = 'ERROR: Invalid Operator';
+      bottomDisplay.textContent = sum;
+  }
+
+  backspaceButton.disabled = true;
   bottomDisplay.textContent = sum; // Show sum at bottom.
   previousNumber = sum; // Make the sum become the first number.
   currentNumber = ''; // Clear the second number so it is ready to be operated on with the first number.
