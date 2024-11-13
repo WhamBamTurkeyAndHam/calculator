@@ -24,6 +24,13 @@ clearButton.addEventListener('click', () => {
   backspaceButton.disabled = false;
 });
 
+// Clear display.
+function clearDisplay() {
+  currentNumber = '';
+  previousNumber = '';
+  operator = '';
+}
+
 // Backspace element.
 backspaceButton.addEventListener('click', () => {
   currentNumber = currentNumber.slice(0, -1);
@@ -35,9 +42,7 @@ numberButtons.forEach(numbers => numbers.addEventListener('click',(e) => {
   if (currentNumber === '0') currentNumber = '';
   if (bottomDisplay.textContent.includes('ERROR')) { // If there is an error message displayed, reset everything.
     bottomDisplay.textContent = '';
-    currentNumber = '';
-    previousNumber = '';
-    operator = '';
+    clearDisplay()
 
     // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
     setTimeout(() => {
@@ -67,9 +72,7 @@ equalButton.addEventListener('click', () => {
     bottomDisplay.textContent = 'ERROR: Invalid Input';
     
     // Reset the calculator state after displaying the error.
-    currentNumber = '';
-    previousNumber = '';
-    operator = '';
+    clearDisplay()
 
     // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS).
     setTimeout(() => {
@@ -104,10 +107,8 @@ function operate() {
     case '÷':
       if (num1 === 0 && num2 === 0) {
         sum = bottomDisplay.textContent = 'ERROR: Indeterminate'
-        
-        currentNumber = '';
-        previousNumber = '';
-        operator = '';
+
+        clearDisplay()
     
         // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
         setTimeout(() => {
@@ -116,10 +117,8 @@ function operate() {
 
       } else if (num2 === 0) {
         sum = bottomDisplay.textContent = 'ERROR: Division by Zero';
-                
-        currentNumber = '';
-        previousNumber = '';
-        operator = '';
+
+        clearDisplay()
     
       } else {
         sum = num1 / num2;
