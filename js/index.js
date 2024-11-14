@@ -7,7 +7,6 @@ const clearButton = document.querySelector('.clear');
 const backspaceButton = document.querySelector('.backspace');
 let numberButtons = document.querySelectorAll('.numbers');
 let operatorButtons = document.querySelectorAll('.operators');
-const decimalButton = document.querySelector('.decimal');
 const equalButton = document.querySelector('.equal');
 
 let previousNumber = '';
@@ -39,8 +38,15 @@ backspaceButton.addEventListener('click', () => {
 
 // Handle numbers that are selected.
 numberButtons.forEach(numbers => numbers.addEventListener('click',(e) => {
+  const num = e.target.textContent;
+
   if (currentNumber === '0') currentNumber = '';
-  if (bottomDisplay.textContent.includes('ERROR')) { // If there is an error message displayed, reset everything.
+
+  // Append number if it's not a duplicate decimal.
+  if (!(num === '.' && currentNumber.includes('.'))) currentNumber += num;
+
+  // If there is an error message displayed, reset everything.
+  if (bottomDisplay.textContent.includes('ERROR')) {
     bottomDisplay.textContent = '';
     clearDisplay()
 
@@ -49,8 +55,6 @@ numberButtons.forEach(numbers => numbers.addEventListener('click',(e) => {
       topDisplay.textContent = '';
     }, 1500);
   }
-  const num = e.target.textContent;
-  currentNumber += num;
   bottomDisplay.textContent = `${previousNumber} ${operator} ${currentNumber}`;
 }));
 
@@ -130,7 +134,7 @@ function operate() {
   }
 
   backspaceButton.disabled = true;
-  bottomDisplay.textContent = sum; // Show sum at bottom.
+  bottomDisplay.textContent = sum.toFixed(3); // Show sum at bottom.
   previousNumber = sum; // Make the sum become the first number.
   currentNumber = ''; // Clear the second number so it is ready to be operated on with the first number.
   operator = ''; // Clear the operator so a new one can be used with the next sum.
