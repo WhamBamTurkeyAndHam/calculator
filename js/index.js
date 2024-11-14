@@ -134,7 +134,7 @@ function operate() {
   }
 
   backspaceButton.disabled = true;
-  bottomDisplay.textContent = sum.toFixed(6); // Show sum at bottom.
+  bottomDisplay.textContent = parseFloat(sum.toFixed(6)); // Show sum at bottom.
   previousNumber = sum; // Make the sum become the first number.
   currentNumber = ''; // Clear the second number so it is ready to be operated on with the first number.
   operator = ''; // Clear the operator so a new one can be used with the next sum.
