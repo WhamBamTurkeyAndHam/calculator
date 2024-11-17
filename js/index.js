@@ -76,7 +76,7 @@ operatorButtons.forEach(button => button.addEventListener('click', (e) => {
 
 equalButton.addEventListener('click', () => {
   // Handle invalid input scenario.
-  if (currentNumber === '' || operator === '') {
+  if (previousNumber === '' || currentNumber === '' || operator === '') {
     bottomDisplay.textContent = 'ERROR: Invalid Input';
     bottomDisplay.classList.add('evenMoreSpace');
     
@@ -165,3 +165,44 @@ function operate() {
   currentNumber = ''; // Clear the second number so it is ready to be operated on with the first number.
   operator = ''; // Clear the operator so a new one can be used with the next sum.
 };
+
+// Handle keyboard support.
+window.addEventListener('keydown', (event) => {
+  const key = event.key;
+
+  if (!isNaN(key) || key ==='.') {
+    handleNumberInput(key);
+  }
+
+  if (['+', '-', '*', '/'].includes(key)) {
+    handleOperatorInput(key);
+  }
+
+  if (key === 'Enter') {
+    equalButton.click();
+  }
+
+  if (key === 'Backspace') {
+    backspaceButton.click();
+  }
+
+  if (key === 'Escape') {
+    clearButton.click();
+  }
+});
+
+// Handle number input.
+function handleNumberInput(num) {
+  const button = [...numberButtons].find(btn => btn.textContent === num);
+  if (button) button.click();
+}
+
+// Handle operator input.
+function handleOperatorInput(op) {
+  let operatorSymbol = op;
+  if (op === '*') operatorSymbol = 'x';
+  if (op === '/') operatorSymbol = '÷';
+
+  const button = [...operatorButtons].find(btn => btn.textContent === operatorSymbol);
+  if (button) button.click();
+}
