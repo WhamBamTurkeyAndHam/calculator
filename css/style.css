@@ -1,7 +1,255 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#backgroundVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+body {
+  background-color: bisque;
+}
+
+.brand, .product {
+  position: absolute;
+  color: white;
+  font-size: 24px;
+}
+
+.brand {
+  top: 0;
+  left: 0;
+  font-family: 'Eurostile', sans-serif;
+  margin-top: 35px;
+  margin-left: 45px;
+}
+
+.product {
+  top: 0;
+  right: 0;
+  font-family: "Charm", cursive;
+  font-weight: 700;
+  font-style: normal;
+  margin-top: 28px;
+  margin-right: 40px;
+}
+
+/* The Whole Calculator */
+.calculatorMasterContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100vw;
+  height: calc(100vh - 70px); /* Adjust height to avoid footer overlap */
+  overflow: hidden;
+}
+
+.calculatorContainer {
+  background-color: rgb(86, 96, 107);
+  box-shadow: 10px 10px 5px rgb(42, 42, 42);
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  gap: 50px;
+  padding-top: 60px;
+  align-items: center;
+  width: 500px;
+  height: 800px;
+  position: relative;  /* Required to position the brand within this container */
+}
+
+/* The display */
+.displayContainer {
+  border: inset darkgray 8px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(229, 248, 248);
+  border-radius: 20px;
+}
+
+.topDisplay, .bottomDisplay {
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 10px 0px 10px 0px;
+}
+
 .topDisplay {
-  border: red solid 10px; /* Easy to see. */
+  font-family: 'DS-Digital', sans-serif;
+  font-size: 55px;
+  color: rgb(90, 90, 90);
+  width: 400px;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: visible;
+  
+  /* Add gradient mask to create the fade effect on the left */
+  mask-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
 }
 
 .bottomDisplay {
-  border: green solid 10px; /* Easy to see. */
+  font-family: 'DS-Digital', sans-serif;
+  font-size: 75px;
+  width: 400px;
+  height: 75px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: visible;
+  
+  /* Add gradient mask to create the fade effect on the left */
+  mask-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 110%);
+  -webkit-mask-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 110%);
+}
+
+.moreSpace {
+  font-size: 2.5vw;
+}
+
+.evenMoreSpace {
+  font-size: 1.5vw;
+}
+
+/* Buttons */
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row1, .row2, .row3, .row4, .row5 {
+  display: flex;
+  gap: 10px;
+}
+
+.buttons {
+  font-size: 50px;
+  width: 100px;
+  height: 100px;
+  box-shadow: 2px 1px black;
+  cursor: pointer;
+  border-radius: 15px;
+  font-family: 'Eurostile', sans-serif;
+  background-color: rgb(227, 227, 227);
+  transition: background-color 0.2s ease;
+}
+
+.buttons:hover {
+  background-color: rgb(241, 241, 241);
+}
+
+.buttons:active {
+  background-color: rgb(255, 255, 255);
+}
+
+.double {
+  flex: 2;
+}
+
+.orange {
+  background-color: #ff8000;
+}
+
+.orange:hover {
+  background-color: #ff972e;
+}
+
+.orange:active {
+  background-color: #ffb162;
+}
+
+.deepOrange {
+  background-color: #ff5900;
+}
+
+.deepOrange:hover {
+  background-color: #fe661b;
+}
+
+.deepOrange:active {
+  background-color: #ff7935;
+}
+
+.clear {
+  background-color: turquoise;
+}
+
+.clear:hover {
+  background-color: rgb(73, 255, 237);
+}
+
+.clear:active {
+  background-color: rgb(108, 255, 240);
+}
+
+/* Footer Stuff */
+footer {
+  display: flex;
+  justify-content: center;
+  font-size: 36px;
+  font-family: 'DS-Digital', sans-serif;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(77, 46, 104);
+  color: white;
+  padding: 10px;
+  z-index: 3;
+}
+
+.footerContainer {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  width: 25%;
+}
+
+.footerContainer > button {
+  background-image: linear-gradient(to right, #ff8000, #ffff00, #fd63e3);
+  background-size: 300%;
+  padding: 5px 8px;
+  transition: background-position 1s;
+  animation: wiggle 5s infinite;
+}
+
+.footerContainer > button:hover {
+  background-position: right;
+}
+
+.wiggle {
+  animation: wiggle 2s infinite;
+}
+
+/* Footer logo and reset button wiggle */
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg); 
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(5deg);
+  }
+  95% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }

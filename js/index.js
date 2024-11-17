@@ -21,6 +21,8 @@ clearButton.addEventListener('click', () => {
   topDisplay.textContent = '';
   bottomDisplay.textContent = 0;
   backspaceButton.disabled = false;
+  bottomDisplay.classList.remove('moreSpace');
+  bottomDisplay.classList.remove('evenMoreSpace');
 });
 
 // Clear display.
@@ -48,6 +50,7 @@ numberButtons.forEach(numbers => numbers.addEventListener('click',(e) => {
   // If there is an error message displayed, reset everything.
   if (bottomDisplay.textContent.includes('ERROR')) {
     bottomDisplay.textContent = '';
+    bottomDisplay.classList.remove('evenMoreSpace');
     clearDisplay()
 
     // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
@@ -61,6 +64,7 @@ numberButtons.forEach(numbers => numbers.addEventListener('click',(e) => {
 // Handle operators that are selected.
 operatorButtons.forEach(button => button.addEventListener('click', (e) => {
   if (previousNumber !== '' && operator && currentNumber) {
+    topDisplay.textContent = `${previousNumber} ${operator} ${currentNumber} =`;
     operate();
   }
   operator = e.target.textContent;
@@ -74,6 +78,7 @@ equalButton.addEventListener('click', () => {
   // Handle invalid input scenario.
   if (currentNumber === '' || operator === '') {
     bottomDisplay.textContent = 'ERROR: Invalid Input';
+    bottomDisplay.classList.add('evenMoreSpace');
     
     // Reset the calculator state after displaying the error.
     clearDisplay()
@@ -105,24 +110,27 @@ function operate() {
     case '-':
       sum = num1 - num2;
       break
-    case 'X':
+    case 'x':
       sum = num1 * num2;
       break
     case '÷':
       if (num1 === 0 && num2 === 0) {
         sum = bottomDisplay.textContent = 'ERROR: Indeterminate'
+        bottomDisplay.classList.add('evenMoreSpace');
 
         clearDisplay()
     
         // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
-        setTimeout(() => {
-          topDisplay.textContent = '';
-        }, 1500);
+        setTimeout(() => { topDisplay.textContent = ''; }, 1500);
 
       } else if (num2 === 0) {
         sum = bottomDisplay.textContent = 'ERROR: Division by Zero';
+        bottomDisplay.classList.add('evenMoreSpace');
 
         clearDisplay()
+
+        // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
+        setTimeout(() => { topDisplay.textContent = ''; }, 1500);
     
       } else {
         sum = num1 / num2;
@@ -131,6 +139,14 @@ function operate() {
     default:
       sum = 'ERROR: Invalid Operator';
       bottomDisplay.textContent = sum;
+      bottomDisplay.classList.add('evenMoreSpace');
+  }
+
+  // Change size of text/numbers so they fit better on the bottom display.
+  if (sum.toString().length >= 7 && sum.toString().length < 10) {
+    bottomDisplay.classList.add('moreSpace');
+  } else if (sum.toString().length >= 10) {
+    bottomDisplay.classList.add('evenMoreSpace');
   }
 
   backspaceButton.disabled = true;

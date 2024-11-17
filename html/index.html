@@ -4,47 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.cdnfonts.com/css/ds-digital" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/eurostile-2" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap" rel="stylesheet">
+  <video autoplay muted loop id="backgroundVideo"><source src="/video/OfficeBackground.mp4" type="video/mp4"></video>
   <script src="/js/index.js" defer></script>
   <script src="https://kit.fontawesome.com/1cae399f64.js" crossorigin="anonymous"></script>
   <title>Calculator - By WhamBam</title>
 </head>
 <body>
-  <div class="calculatorContainer" id="js-calculator-container">
-    <div class="displayContainer" id="js-display-container">
-      <div class="topDisplay" id="js-top-display"></div>
-      <div class="bottomDisplay" id="js-bottom-display">0</div>
-    </div>
-    </div>
-    <div class="buttonsContainer" id="js-buttons-container">
-      <div class="row1" id="js-row-1">
-        <button class="clear">AC</button>
-        <button class="backspace"><i class="fa-solid fa-delete-left"></i></button>
-        <button class="operators">÷</button>
+  <div class="calculatorMasterContainer">
+    <div class="calculatorContainer" id="js-calculator-container">
+      <h1 class="brand">WHAMBAM - IO</h1>
+      <h1 class="product">FX-FRI1511-MK1</h1>
+      <div class="displayContainer" id="js-display-container">
+        <div class="topDisplay" id="js-top-display"></div>
+        <div class="bottomDisplay" id="js-bottom-display">0</div>
       </div>
-      <div class="row2" id="js-row-2">
-        <button class="numbers">7</button>
-        <button class="numbers">8</button>
-        <button class="numbers">9</button>
-        <button class="operators">X</button>
-      </div>
-      <div class="row3" id="js-row-3">
-        <button class="numbers">4</button>
-        <button class="numbers">5</button>
-        <button class="numbers">6</button>
-        <button class="operators">-</button>
-      </div>
-      <div class="row4" id="js-row-4">
-        <button class="numbers">1</button>
-        <button class="numbers">2</button>
-        <button class="numbers">3</button>
-        <button class="operators">+</button>
-      </div>
-      <div class="row5" id="js-row-5">
-        <button class="equal">=</button>
-        <button class="numbers">0</button>
-        <button class="numbers">.</button>
+      <div class="buttonsContainer" id="js-buttons-container">
+        <div class="row1" id="js-row-1">
+          <button class="buttons clear double">AC</button>
+          <button class="buttons backspace orange"><i class="fa-solid fa-delete-left"></i></button>
+          <button class="buttons operators orange">÷</button>
+        </div>
+        <div class="row2" id="js-row-2">
+          <button class="buttons numbers">7</button>
+          <button class="buttons numbers">8</button>
+          <button class="buttons numbers">9</button>
+          <button class="buttons operators orange">x</button>
+        </div>
+        <div class="row3" id="js-row-3">
+          <button class="buttons numbers">4</button>
+          <button class="buttons numbers">5</button>
+          <button class="buttons numbers">6</button>
+          <button class="buttons operators orange">-</button>
+        </div>
+        <div class="row4" id="js-row-4">
+          <button class="buttons numbers">1</button>
+          <button class="buttons numbers">2</button>
+          <button class="buttons numbers">3</button>
+          <button class="buttons operators orange">+</button>
+        </div>
+        <div class="row5" id="js-row-5">
+          <button class="buttons numbers double">0</button>
+          <button class="buttons numbers orange">.</button>
+          <button class="buttons equal deepOrange">=</button>
+        </div>
       </div>
     </div>
   </div>
+  <footer>
+    <div class="footerContainer">
+      <p>Made By WhamBamTurkeyAndHam</p>
+      <p>||</p>
+      <button><a href="https://github.com/WhamBamTurkeyAndHam" target="_blank"><i class="fa fa-github" style="font-size: 42px; cursor: pointer;"></i></a></button>
+    </div>
+  </footer>
 </body>
 </html>
