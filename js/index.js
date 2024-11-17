@@ -142,15 +142,25 @@ function operate() {
       bottomDisplay.classList.add('evenMoreSpace');
   }
 
-  // Change size of text/numbers so they fit better on the bottom display.
-  if (sum.toString().length >= 7 && sum.toString().length < 10) {
+  backspaceButton.disabled = true;
+
+  // Format the sum for display.
+  const formattedSum = parseFloat(sum.toFixed(6)); // Removes unnecessary trailing zeros.
+  bottomDisplay.textContent = formattedSum;
+
+  // Calculate the length of the formatted sum.
+  const sumLength = formattedSum.toString().length;
+
+  // Add appropriate class based on length.
+  if (sumLength >= 7 && sumLength < 10) {
     bottomDisplay.classList.add('moreSpace');
-  } else if (sum.toString().length >= 10) {
+  } else if (sumLength >= 10) {
+    bottomDisplay.classList.remove('moreSpace');
     bottomDisplay.classList.add('evenMoreSpace');
+  } else {
+    bottomDisplay.classList.remove('moreSpace', 'evenMoreSpace'); // Remove classes if not needed.
   }
 
-  backspaceButton.disabled = true;
-  bottomDisplay.textContent = parseFloat(sum.toFixed(6)); // Show sum at bottom.
   previousNumber = sum; // Make the sum become the first number.
   currentNumber = ''; // Clear the second number so it is ready to be operated on with the first number.
   operator = ''; // Clear the operator so a new one can be used with the next sum.
