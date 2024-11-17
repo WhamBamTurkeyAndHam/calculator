@@ -8,6 +8,43 @@ const backspaceButton = document.querySelector('.backspace');
 let numberButtons = document.querySelectorAll('.numbers');
 let operatorButtons = document.querySelectorAll('.operators');
 const equalButton = document.querySelector('.equal');
+const backgroundAudio = document.querySelector('.backgroundAudio');
+const muteButton = document.querySelector('.backgroundMute');
+const backgroundVideo = document.querySelector('#backgroundVideo');
+const backgroundVideoButton = document.querySelector('.backgroundVideoButton');
+
+// Background button toggle.
+backgroundVideoButton.addEventListener('click', () => {
+   // Check the current state of the video and toggle visibility
+   if (backgroundVideo.style.display === 'none') {
+    backgroundVideoButton.innerHTML = '<i class="fa-regular fa-image"</i>';
+    backgroundVideo.style.display = 'block';
+  } else {
+    backgroundVideoButton.innerHTML = '<i class="fa-solid fa-image"></i>';
+    backgroundVideo.style.display = 'none';
+  }
+});
+
+// Background sound button toggle.
+backgroundAudio.muted = true;
+backgroundAudio.volume = 0.1;
+
+// Add event listener to mute button to toggle mute/unmute.
+muteButton.addEventListener('click', () => {
+  backgroundAudio.muted = !backgroundAudio.muted;
+
+  if (backgroundAudio.muted) {
+    muteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+  } else {
+    muteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+    // Play the audio when unmuted, if not already playing.
+    if (backgroundAudio.paused) {
+      backgroundAudio.play().catch(error => {
+        console.log("Audio failed to play:", error);
+      });
+    }
+  }
+});
 
 let previousNumber = '';
 let currentNumber = '';

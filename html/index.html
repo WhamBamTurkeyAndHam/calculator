@@ -9,13 +9,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="#" />
   <video autoplay muted loop id="backgroundVideo"><source src="/video/OfficeBackground.mp4" type="video/mp4"></video>
+  <audio class="backgroundAudio" src="/audio/Office-Ambiance.mov" autoplay loop></audio>
   <script src="/js/index.js" defer></script>
   <script src="https://kit.fontawesome.com/1cae399f64.js" crossorigin="anonymous"></script>
   <title>Calculator - By WhamBam</title>
 </head>
 <body>
   <div class="calculatorMasterContainer">
+    <div class="backgroundButtons">
+      <button class="backgroundMute"><i class="fa-solid fa-volume-xmark"></i></button>
+      <button class="backgroundVideoButton"><i class="fa-regular fa-image"></i></button>
+    </div>
     <div class="calculatorContainer" id="js-calculator-container">
       <h1 class="brand">WHAMBAM - IO</h1>
       <h1 class="product">FX-FRI1511-MK1</h1>

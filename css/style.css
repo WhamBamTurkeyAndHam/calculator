@@ -43,6 +43,7 @@ body {
 /* The Whole Calculator */
 .calculatorMasterContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -126,6 +127,12 @@ body {
 }
 
 /* Buttons */
+.backgroundButtons {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+}
+
 .buttonsContainer {
   display: flex;
   flex-direction: column;
@@ -137,7 +144,7 @@ body {
   gap: 10px;
 }
 
-.buttons {
+.buttons, .backgroundMute, .backgroundVideoButton {
   font-size: 50px;
   width: 100px;
   height: 100px;
@@ -149,11 +156,11 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.buttons:hover {
+.buttons:hover, .backgroundMute:hover, .backgroundVideoButton:hover {
   background-color: rgb(241, 241, 241);
 }
 
-.buttons:active {
+.buttons:active, .backgroundMute:active, .backgroundVideoButton:active {
   background-color: rgb(255, 255, 255);
 }
 
