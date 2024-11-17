@@ -182,8 +182,9 @@ function operate() {
   backspaceButton.disabled = true;
 
   // Format the sum for display.
-  const formattedSum = parseFloat(sum.toFixed(6)); // Removes unnecessary trailing zeros.
-  bottomDisplay.textContent = formattedSum;
+const formattedSum = parseFloat(sum.toFixed(6)); // Removes unnecessary trailing zeros
+const formattedSumWithCommas = formattedSum.toLocaleString(); // Adds commas for thousands
+bottomDisplay.textContent = formattedSumWithCommas;
 
   // Calculate the length of the formatted sum.
   const sumLength = formattedSum.toString().length;
