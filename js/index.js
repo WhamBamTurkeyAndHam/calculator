@@ -13,16 +13,15 @@ const muteButton = document.querySelector('.backgroundMute');
 const backgroundVideo = document.querySelector('#backgroundVideo');
 const backgroundVideoButton = document.querySelector('.backgroundVideoButton');
 
-// Background button toggle.
+// Background video button toggle.
 backgroundVideoButton.addEventListener('click', () => {
-   // Check the current state of the video and toggle visibility
    if (backgroundVideo.style.display === 'none') {
     backgroundVideoButton.innerHTML = '<i class="fa-regular fa-image"</i>';
     backgroundVideo.style.display = 'block';
   } else {
     backgroundVideoButton.innerHTML = '<i class="fa-solid fa-image"></i>';
     backgroundVideo.style.display = 'none';
-  }
+  };
 });
 
 // Background sound button toggle.
@@ -43,7 +42,7 @@ muteButton.addEventListener('click', () => {
         console.log("Audio failed to play:", error);
       });
     }
-  }
+  };
 });
 
 let previousNumber = '';
@@ -67,7 +66,7 @@ function clearDisplay() {
   currentNumber = '';
   previousNumber = '';
   operator = '';
-}
+};
 
 // Backspace element.
 backspaceButton.addEventListener('click', () => {
@@ -90,7 +89,6 @@ numberButtons.forEach(numbers => numbers.addEventListener('click',(e) => {
     bottomDisplay.classList.remove('evenMoreSpace');
     clearDisplay()
 
-    // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
     setTimeout(() => {
       topDisplay.textContent = '';
     }, 1500);
@@ -120,7 +118,6 @@ equalButton.addEventListener('click', () => {
     // Reset the calculator state after displaying the error.
     clearDisplay()
 
-    // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS).
     setTimeout(() => {
       topDisplay.textContent = '';
     }, 1500);
@@ -130,7 +127,7 @@ equalButton.addEventListener('click', () => {
       topDisplay.textContent = `${previousNumber} ${operator} ${currentNumber} =`;
       operate();
     }
-  }
+  };
 });
 
 function operate() {
@@ -139,7 +136,6 @@ function operate() {
   sum = '';
 
   // Switch/Case style with if else statement.
-  
   switch (operator) {
     case '+':
       sum = num1 + num2;
@@ -157,7 +153,6 @@ function operate() {
 
         clearDisplay()
     
-        // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
         setTimeout(() => { topDisplay.textContent = ''; }, 1500);
 
       } else if (num2 === 0) {
@@ -166,24 +161,23 @@ function operate() {
 
         clearDisplay()
 
-        // Clear top display after some delay. (This will be later changed to fade out when I get around to CSS)
         setTimeout(() => { topDisplay.textContent = ''; }, 1500);
     
       } else {
         sum = num1 / num2;
-      }
+      };
       break
     default:
       sum = 'ERROR: Invalid Operator';
       bottomDisplay.textContent = sum;
       bottomDisplay.classList.add('evenMoreSpace');
-  }
+  };
 
   backspaceButton.disabled = true;
 
     // Format the sum for display.
-  const formattedSum = parseFloat(sum.toFixed(6)); // Removes unnecessary trailing zeros
-  const formattedSumWithCommas = formattedSum.toLocaleString(); // Adds commas for thousands
+  const formattedSum = parseFloat(sum.toFixed(6)); // Removes unnecessary trailing zeros.
+  const formattedSumWithCommas = formattedSum.toLocaleString(); // Adds commas for thousands.
   bottomDisplay.textContent = formattedSumWithCommas;
 
   // Calculate the length of the formatted sum.
@@ -197,7 +191,7 @@ function operate() {
     bottomDisplay.classList.add('evenMoreSpace');
   } else {
     bottomDisplay.classList.remove('moreSpace', 'evenMoreSpace'); // Remove classes if not needed.
-  }
+  };
 
   previousNumber = sum; // Make the sum become the first number.
   currentNumber = ''; // Clear the second number so it is ready to be operated on with the first number.
@@ -233,7 +227,7 @@ window.addEventListener('keydown', (event) => {
 function handleNumberInput(num) {
   const button = [...numberButtons].find(btn => btn.textContent === num);
   if (button) button.click();
-}
+};
 
 // Handle operator input.
 function handleOperatorInput(op) {
@@ -243,4 +237,4 @@ function handleOperatorInput(op) {
 
   const button = [...operatorButtons].find(btn => btn.textContent === operatorSymbol);
   if (button) button.click();
-}
+};

@@ -48,7 +48,7 @@ body {
   align-items: center;
   box-sizing: border-box;
   width: 100vw;
-  height: calc(100vh - 70px); /* Adjust height to avoid footer overlap */
+  height: calc(100vh - 70px);
   overflow: hidden;
 }
 
@@ -63,7 +63,7 @@ body {
   align-items: center;
   width: 500px;
   height: 800px;
-  position: relative;  /* Required to position the brand within this container */
+  position: relative;
 }
 
 /* The display */
@@ -95,7 +95,6 @@ body {
   max-height: 100%;
   overflow: visible;
   
-  /* Add gradient mask to create the fade effect on the left */
   mask-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
   -webkit-mask-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
 }
@@ -113,7 +112,6 @@ body {
   max-height: 100%;
   overflow: visible;
   
-  /* Add gradient mask to create the fade effect on the left */
   mask-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 110%);
   -webkit-mask-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 110%);
 }
